@@ -13,7 +13,7 @@ this.state={
 
 mountFunc=()=> {
     // it will make HTTP request to the requested API.
-    axios.get('/').then(res=>{
+    axios.get('http://localhost:5000/').then(res=>{
         console.log('response', res);
     });
 }
