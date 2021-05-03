@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-let weatherData = require('./assests/weather.json');
+let weatherData = require('./weather.json');
 const send = require('send');
  
 // app.get('/', function (req, res) {
