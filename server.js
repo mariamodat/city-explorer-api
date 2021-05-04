@@ -12,30 +12,40 @@ app.get('/', (req, res) => res.send('this is Mariam'));
 
 
 
-app.get('/location',locationSet);
-function locationSet(request,response){
-        const cityName=request.query.city;
-        // console.log('Hi query',request.query)
-        let key=process.env.LOCATION_KEY;
-        const url = `https://eu1.locationiq.com/v1/search.php?key=${key}&q=${cityName}&format=json` 
-         superagent.get(url)
-         .then(data =>{
-            let locationData = new Location (cityName,data.body);            
-            response.send(locationData);
-         })
-         .catch(()=>{
-        errorHandler()
-    })
-}
+// app.get('/location',locationSet);
+// function locationSet(request,response){
+//         const cityName=request.query.city;
+//         // console.log('Hi query',request.query)
+//         let key=process.env.LOCATION_KEY;
+//         const url = `https://eu1.locationiq.com/v1/search.php?key=${key}&q=${cityName}&format=json` 
+//          superagent.get(url)
+//          .then(data =>{
+//             let locationData = new Location (cityName,data.body);            
+//             response.send(locationData);
+//          })
+//          .catch(()=>{
+//         errorHandler()
+//     })
+// }
+
+
+app.get('/weather', (rq,rs)=> {
+  // console.log(rq.query);
+ 
+    // console.log(rq.query);
+  
+    console.log(weatherData);
+        const arrOfData = weatherData.data.map(data => new Weather(data));
+       
+        rs.send(arrOfData);
+    });
+
+  
 
 
 
 
 
-
-
-
-    
 
 
     function Weather(item) {
