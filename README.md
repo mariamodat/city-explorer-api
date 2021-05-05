@@ -9,7 +9,7 @@ I will begin building my own custom API server, which will provide data for the 
 ## Getting Started
 input the name of the city they want to preview its weather.
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
 we used React as the programming library or JS, Express to connect the front end with the backend with some bootstap styling.
 
 ## Change Log

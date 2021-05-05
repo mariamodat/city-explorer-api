@@ -4,20 +4,43 @@ const cors = require('cors');
 let weatherData = require('./weather.json');
 require('dotenv').config()
 const PORT = process.env.PORT || 3030;
-const keyLocation = process.env.LOCATION_KEY;
 const superagent = require('superagent');
 app.use(cors());
+let key=process.env.WEATHER_KEY;
 
 app.get('/', (req, res) => res.send('this is Mariam'));
 
 
 
-// app.get('/location',locationSet);
+app.get('/weatherl',(request,response)=> {
+
+  // const cityName=request.query.city;
+  try {
+   
+
+    const long= request.query.lon;
+    const latit= request.query.lat;
+    const url = `http://api.weatherbit.io/v2.0/forecast/daily&key=${key}?key=${key}&lon=${long}&lat=${latit}`;
+  superagent.get(url).then(data=> {
+  
+    const arrOfData = data.body.data.map(item => new Weather(item));
+    response.send(arrOfData);
+  })
+
+  }
+catch (error ){
+const arrOfData=weatherData.data.map(data => new Weather(data));
+res.send(arrOfData);
+}
+
+});
 // function locationSet(request,response){
 //         const cityName=request.query.city;
 //         // console.log('Hi query',request.query)
-//         let key=process.env.LOCATION_KEY;
+//       
 //         const url = `https://eu1.locationiq.com/v1/search.php?key=${key}&q=${cityName}&format=json` 
+//         
+
 //          superagent.get(url)
 //          .then(data =>{
 //             let locationData = new Location (cityName,data.body);            
@@ -41,6 +64,32 @@ app.get('/weather', (rq,rs)=> {
     });
 
   
+app.get('/movies',(req,res)=> {
+  // res.send('hi from movies');
+  const lat = req.query.latitude;
+const lon = req.query.longitude;
+  const movieUrl= `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${}`;
+  superagent.get(movieUrl).then(data=> {
+    console.log(data.body);
+    const moviesArr= data.body.data.map(one => new Movies(one));
+    res.send(moviesArr);
+  })
+
+
+})
+
+
+
+
+function Movies(data) {
+ this.title =data.name;
+ this.overview=data.overview;
+ this.avg=data.average_votes;
+ this.votes=data.total_votes;
+ this.image=data.image_url;
+ this.popularity=data.popularity;
+ this.released_on=data.released_on;
+}
 
 
 
@@ -54,12 +103,12 @@ app.get('/weather', (rq,rs)=> {
       this.time = item.datetime;
     }
 
-    function Location(cityName, loca) {
-      this.search_query = cityName;
-      this.formatted_query = loca[0].display_name;
-      this.latitude = loca[0].lat;
-      this.longitude = loca[0].lon;
-    }
+    // function Location(cityName, loca) {
+    //   this.search_query = cityName;
+    //   this.formatted_query = loca[0].display_name;
+    //   this.latitude = loca[0].lat;
+    //   this.longitude = loca[0].lon;
+    // }
 
 
 
