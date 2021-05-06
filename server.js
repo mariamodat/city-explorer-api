@@ -98,7 +98,7 @@ class Movies {
       this.overview = data.overview;
     this.avg = data.average_votes;
     this.votes = data.total_votes;
-    this.image = data.image_url;
+    this.image = data.poster_path;
     this.popularity = data.popularity;
     this.released_on = data.released_on;
   }
