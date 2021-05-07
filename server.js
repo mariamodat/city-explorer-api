@@ -96,11 +96,11 @@ class Movies {
   constructor(data) {
     this.title = data.title,
       this.overview = data.overview;
-    this.avg = data.average_votes;
-    this.votes = data.total_votes;
+    this.avg = data.vote_average;
+    this.votes = data.vote_count;
     this.image = data.poster_path;
     this.popularity = data.popularity;
-    this.released_on = data.released_on;
+    this.released_on = data.release_date;
   }
 }
 
